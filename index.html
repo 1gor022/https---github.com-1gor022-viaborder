@@ -3,53 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Via Border - Criação Selecionada de Border Collie</title>
+    <title>Via Border - Sistema Integrado</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1076/1076928.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <style>
-        body { font-family: 'Open Sans', sans-serif; }
-        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
-        
-        /* Efeito Parallax (Corrigido para Celular) */
-        .hero-bg {
-            /* O degradê escuro + a imagem */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?q=80&w=2572&auto=format&fit=crop');
-            
-            /* Configuração padrão (Mobile Friendly) */
-            background-position: center;
-            background-size: cover;
-            background-attachment: scroll; /* No celular, a imagem rola junto */
-        }
-
-        /* Só ativa o efeito "travado" em telas maiores que tablets */
-        @media (min-width: 768px) {
-            .hero-bg {
-                background-attachment: fixed;
-            }
-        }
-        
-        /* Classes utilitárias para esconder o painel */
-        .hidden { display: none; }
-    </style>
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         'brand-green': '#2C5F2D',
-                        'brand-gold': '#D4AF37', 
+                        'brand-gold': '#D4AF37',
                         'brand-dark': '#1A202C',
                     }
                 }
             }
         }
     </script>
+
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
+        
+        /* CSS corrigido para celular */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?q=80&w=2572&auto=format&fit=crop');
+            background-position: center;
+            background-size: cover;
+            background-attachment: scroll; /* Mobile friendly */
+        }
+        @media (min-width: 768px) {
+            .hero-bg { background-attachment: fixed; }
+        }
+        
+        /* Estilos do Admin */
+        /* REMOVI A REGRA .hidden QUE CAUSAVA O BUG */
+        
+        .tab-active { border-bottom: 3px solid #D4AF37; color: #1A202C; font-weight: bold; background: #f7f7f7; }
+        .tab-inactive { color: #718096; cursor: pointer; }
+        .tab-inactive:hover { background: #f7f7f7; color: #2C5F2D; }
+    </style>
 </head>
 <body class="text-gray-700 antialiased">
 
@@ -64,30 +60,32 @@
                 <a href="#sobre" class="hover:text-brand-green font-semibold transition">O Canil</a>
                 <a href="#plantel" class="hover:text-brand-green font-semibold transition">Nosso Plantel</a>
                 <a href="#filhotes" class="hover:text-brand-green font-semibold transition">Filhotes</a>
-                <a href="#contato" class="bg-brand-green text-white px-5 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg">
+                <a href="https://wa.me/557999285696" target="_blank" class="bg-brand-green text-white px-5 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg transform hover:-translate-y-0.5">
                     Contato
                 </a>
             </div>
 
-            <button id="mobile-btn" class="md:hidden text-gray-600 focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
+            <button id="mobile-btn" class="md:hidden text-2xl text-brand-green focus:outline-none">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4">
-            <a href="#home" class="block py-2 text-brand-green font-bold">Início</a>
-            <a href="#filhotes" class="block py-2 text-gray-600">Filhotes</a>
-            <a href="#contato" class="block py-2 text-brand-green font-bold">WhatsApp</a>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 shadow-xl">
+            <a href="#home" class="block py-3 text-brand-dark font-semibold border-b border-gray-100">Início</a>
+            <a href="#sobre" class="block py-3 text-brand-dark font-semibold border-b border-gray-100">O Canil</a>
+            <a href="#plantel" class="block py-3 text-brand-dark font-semibold border-b border-gray-100">Plantel</a>
+            <a href="#filhotes" class="block py-3 text-brand-dark font-semibold">Filhotes</a>
         </div>
     </nav>
 
     <header id="home" class="hero-bg h-screen flex items-center justify-center text-center px-4">
         <div class="max-w-4xl text-white">
             <p class="text-brand-gold font-bold tracking-widest uppercase mb-4 animate-pulse">Excelência na criação</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-lg">
                 Inteligência, Beleza e <br> Temperamento.
             </h1>
             <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#filhotes" class="bg-brand-gold text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 transition shadow-xl">
+                <a href="#filhotes" class="bg-brand-gold text-brand-dark px-8 py-4 rounded-full font-bold hover:bg-yellow-500 transition shadow-xl transform hover:-translate-y-1">
                     Ver Filhotes Disponíveis
                 </a>
             </div>
@@ -110,55 +108,28 @@
                 <h2 class="text-4xl font-bold text-brand-dark">Nosso Plantel</h2>
                 <div class="w-24 h-1 bg-brand-gold mx-auto mt-4"></div>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1568393691622-c7ba78064b51?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold mb-2">Grand Ch. Apollo</h3>
-                        <p class="text-gray-500 text-sm">Padreador Importado</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1601979031925-424e5d4a7874?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold mb-2">Ch. Luna</h3>
-                        <p class="text-gray-500 text-sm">Matriz Principal</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1529927066849-79b791a69825?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    </div>
-                    <div class="p-6 text-center">
-                        <h3 class="text-xl font-bold mb-2">Maximus</h3>
-                        <p class="text-gray-500 text-sm">Jovem Campeão</p>
-                    </div>
-                </div>
+
+            <div id="grid-plantel" class="grid md:grid-cols-3 gap-8">
+                <p class="col-span-full text-center text-gray-500">Carregando plantel...</p>
             </div>
         </div>
     </section>
 
-    <section id="filhotes" class="py-20 bg-white">
+    <section id="filhotes" class="py-20 bg-white relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 relative">
                 <span id="system-status" class="bg-green-100 text-brand-green py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wide">Atualizado Agora</span>
                 <h2 class="text-4xl font-bold mt-4 mb-4">Filhotes da Ninhada</h2>
                 <p class="text-gray-600">Encontre o seu novo melhor amigo.</p>
                 
-                <button id="btn-admin-trigger" onclick="abrirAdmin()" class="hidden absolute top-0 right-0 bg-brand-dark text-white text-xs px-3 py-1 rounded shadow hover:bg-gray-800">
-                    <i class="fas fa-cog"></i> Gerenciar
+                <button id="btn-admin-trigger" onclick="abrirAdmin()" class="hidden fixed bottom-6 right-6 bg-brand-dark text-white p-4 rounded-full shadow-2xl z-50 hover:bg-black transition transform hover:scale-110 border-2 border-brand-gold group">
+                    <i class="fas fa-tools text-xl group-hover:rotate-45 transition"></i>
+                    <span class="absolute right-full mr-3 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap">Gerenciar</span>
                 </button>
             </div>
 
             <div id="grid-filhotes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="col-span-full text-center py-10 text-gray-400">
-                    <i class="fas fa-circle-notch fa-spin text-3xl mb-3"></i>
-                    <p>Carregando disponibilidade...</p>
-                </div>
+                <p class="col-span-full text-center text-gray-500">Carregando filhotes...</p>
             </div>
         </div>
     </section>
@@ -184,274 +155,260 @@
         </div>
         <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-600 text-sm">
             <p>&copy; 2025 Canil Via Border. Todos os direitos reservados.</p>
-            
             <button onclick="abrirLogin()" class="mt-4 text-xs hover:text-gray-400 underline opacity-50">Área do Criador</button>
         </div>
     </footer>
 
-    <div id="modal-login" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg p-8 max-w-sm w-full shadow-2xl relative">
-            <button onclick="fecharModais()" class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
-            <h3 class="text-2xl font-bold mb-1 text-brand-dark">Área Restrita</h3>
-            <p class="text-gray-500 text-sm mb-6">Acesso exclusivo para administração.</p>
-            
+    <div id="modal-login" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-sm w-full relative">
+            <button onclick="fecharModais()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="text-2xl font-bold mb-6 text-brand-dark border-b pb-2">Acesso Restrito</h3>
             <form onsubmit="fazerLogin(event)">
-                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
-                <input type="email" id="email-login" class="w-full border p-2 rounded mb-3 bg-gray-50 focus:border-brand-green outline-none">
-                
-                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Senha</label>
-                <input type="password" id="senha-login" class="w-full border p-2 rounded mb-6 bg-gray-50 focus:border-brand-green outline-none">
-                
-                <button type="submit" class="w-full bg-brand-green text-white py-3 rounded font-bold hover:bg-green-800 transition shadow-lg">ENTRAR</button>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-1 text-gray-600">Email</label>
+                    <input type="email" id="email-login" class="w-full border-2 border-gray-200 p-2 rounded focus:border-brand-green outline-none">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold mb-1 text-gray-600">Senha</label>
+                    <input type="password" id="senha-login" class="w-full border-2 border-gray-200 p-2 rounded focus:border-brand-green outline-none">
+                </div>
+                <button type="submit" class="w-full bg-brand-green text-white py-3 rounded font-bold hover:bg-green-800 transition shadow-lg">Entrar no Sistema</button>
             </form>
         </div>
     </div>
 
     <div id="modal-admin" class="hidden fixed inset-0 bg-gray-100 z-50 overflow-y-auto">
-        <div class="bg-white shadow-md sticky top-0 z-10">
-            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <h2 class="text-xl font-bold text-brand-green">Painel de Controle</h2>
-                <div>
-                    <button onclick="fecharModais()" class="text-gray-500 mr-4 hover:text-brand-dark">Voltar ao Site</button>
-                    <button onclick="fazerLogout()" class="text-red-500 font-bold border border-red-500 px-3 py-1 rounded hover:bg-red-50">Sair</button>
-                </div>
+        <div class="bg-white shadow sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b border-brand-gold">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-user-shield text-brand-green text-xl"></i>
+                <h2 class="text-xl font-bold text-brand-dark">Painel de Controle</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="fazerLogout()" class="text-red-500 hover:text-red-700 text-sm font-bold flex items-center gap-1"><i class="fas fa-sign-out-alt"></i> Sair</button>
+                <button onclick="fecharModais()" class="bg-gray-200 hover:bg-gray-300 w-8 h-8 rounded-full flex items-center justify-center text-gray-600"><i class="fas fa-times"></i></button>
             </div>
         </div>
 
-        <div class="container mx-auto px-4 py-8 max-w-4xl">
-            <div class="bg-white p-6 rounded-xl shadow-lg mb-8 border-t-4 border-brand-green">
-                <h3 class="text-lg font-bold mb-4 text-gray-800"><i class="fas fa-plus-circle mr-2"></i>Adicionar Novo Filhote</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome</label>
-                        <input id="input-nome" type="text" placeholder="Ex: Thor" class="w-full border p-2 rounded focus:ring-2 ring-brand-green outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Cor</label>
-                        <input id="input-cor" type="text" placeholder="Ex: Preto e Branco" class="w-full border p-2 rounded focus:ring-2 ring-brand-green outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Sexo</label>
-                        <select id="input-sexo" class="w-full border p-2 rounded bg-white">
-                            <option value="Macho">Macho</option>
-                            <option value="Fêmea">Fêmea</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Status</label>
-                        <select id="input-status" class="w-full border p-2 rounded bg-white">
-                            <option value="Disponível">Disponível</option>
-                            <option value="Reservado">Reservado</option>
-                            <option value="Vendido">Vendido</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Foto do Filhote</label>
-                    <div class="border-2 border-dashed border-gray-300 rounded p-6 text-center hover:bg-gray-50 transition cursor-pointer relative">
-                        <input type="file" id="input-foto" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                        <p class="text-sm text-gray-500">Clique ou arraste a foto aqui</p>
-                    </div>
-                </div>
-
-                <button onclick="salvarFilhote()" id="btn-salvar" class="mt-6 w-full bg-brand-gold text-brand-dark py-3 rounded font-bold hover:bg-yellow-500 transition shadow">
-                    PUBLICAR FILHOTE
+        <div class="container mx-auto px-4 py-8 max-w-5xl">
+            
+            <div class="flex mb-8 bg-white rounded shadow overflow-hidden">
+                <button onclick="mudarAba('filhotes')" id="tab-filhotes" class="flex-1 py-4 text-center tab-active transition">
+                    <i class="fas fa-dog mr-2"></i> Gerenciar Filhotes
+                </button>
+                <button onclick="mudarAba('plantel')" id="tab-plantel" class="flex-1 py-4 text-center tab-inactive transition">
+                    <i class="fas fa-trophy mr-2"></i> Gerenciar Plantel
                 </button>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-                <h3 class="text-lg font-bold mb-4 text-gray-800">Gerenciar Lista Atual</h3>
-                <div id="lista-admin" class="divide-y">
-                    <p class="text-gray-400 text-center py-4">Carregando...</p>
+            <div id="area-filhotes">
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-8 border-l-4 border-brand-gold">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 id="titulo-form-filhote" class="font-bold text-lg text-brand-green">Adicionar Novo Filhote</h3>
+                        <button onclick="cancelarEdicao('filhote')" id="btn-cancel-filhote" class="hidden text-sm text-gray-500 hover:text-red-500 underline">Cancelar Edição</button>
+                    </div>
+                    
+                    <input type="hidden" id="edit-id-filhote"> <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <input id="f-nome" type="text" placeholder="Nome do Filhote" class="border p-3 rounded bg-gray-50 focus:bg-white focus:border-brand-gold outline-none">
+                        <input id="f-cor" type="text" placeholder="Cor (ex: Preto e Branco)" class="border p-3 rounded bg-gray-50 focus:bg-white focus:border-brand-gold outline-none">
+                        <select id="f-sexo" class="border p-3 rounded bg-gray-50"><option>Macho</option><option>Fêmea</option></select>
+                        <select id="f-status" class="border p-3 rounded bg-gray-50"><option>Disponível</option><option>Reservado</option><option>Vendido</option></select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-xs text-gray-500 mb-1 font-bold">Foto do Filhote</p>
+                        <input type="file" id="f-foto" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-green file:text-white hover:file:bg-green-700">
+                        <p id="aviso-foto-filhote" class="text-xs text-orange-500 mt-1 hidden">Nota: Se não selecionar uma nova foto, a atual será mantida.</p>
+                    </div>
+
+                    <button onclick="salvarFilhote()" id="btn-salvar-filhote" class="w-full bg-brand-dark text-white py-3 rounded font-bold hover:bg-black transition shadow">Salvar Filhote</button>
                 </div>
+
+                <h4 class="font-bold text-gray-400 text-sm uppercase tracking-wider mb-4">Cadastrados Recentemente</h4>
+                <div id="lista-admin-filhotes" class="space-y-3"></div>
             </div>
+
+            <div id="area-plantel" class="hidden">
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-8 border-l-4 border-brand-green">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 id="titulo-form-plantel" class="font-bold text-lg text-brand-green">Adicionar Cão ao Plantel</h3>
+                        <button onclick="cancelarEdicao('plantel')" id="btn-cancel-plantel" class="hidden text-sm text-gray-500 hover:text-red-500 underline">Cancelar Edição</button>
+                    </div>
+
+                    <input type="hidden" id="edit-id-plantel">
+
+                    <div class="grid gap-4 mb-4">
+                        <input id="p-nome" type="text" placeholder="Nome do Cão (ex: Gr. Ch. Apollo)" class="border p-3 rounded bg-gray-50 focus:bg-white focus:border-brand-gold outline-none">
+                        <input id="p-descricao" type="text" placeholder="Descrição (ex: Padreador Importado - Melhor da Raça)" class="border p-3 rounded bg-gray-50 focus:bg-white focus:border-brand-gold outline-none">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <p class="text-xs text-gray-500 mb-1 font-bold">Foto do Cão (Preferência: Horizontal/Fundo Limpo)</p>
+                        <input type="file" id="p-foto" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-gold file:text-brand-dark hover:file:bg-yellow-500">
+                        <p id="aviso-foto-plantel" class="text-xs text-orange-500 mt-1 hidden">Nota: Se não selecionar uma nova foto, a atual será mantida.</p>
+                    </div>
+
+                    <button onclick="salvarPlantel()" id="btn-salvar-plantel" class="w-full bg-brand-green text-white py-3 rounded font-bold hover:bg-green-800 transition shadow">Salvar no Plantel</button>
+                </div>
+
+                <h4 class="font-bold text-gray-400 text-sm uppercase tracking-wider mb-4">Cães no Plantel</h4>
+                <div id="lista-admin-plantel" class="space-y-3"></div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // CONFIGURAÇÃO (COLOQUE SEUS DADOS AQUI)
-        // ==========================================
+        // === CONFIGURAÇÃO DO SUPABASE ===
         const SUPABASE_URL = 'https://ypvlhultmzlxxpfbudbu.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwdmxodWx0bXpseHhwZmJ1ZGJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3NzUyODcsImV4cCI6MjA4MjM1MTI4N30.n0RdzOylHQuGWGspHFcpOv3CDGyaa_CT0lHIBFz2QwA';
-        
-        // CORREÇÃO: Usamos 'supabaseClient' para não conflitar com a biblioteca
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // ==========================================
-        // 1. CARREGAR O SITE PÚBLICO
-        // ==========================================
-        
-        function montarCardOriginal(pet) {
-            const status = pet.status || "Disponível"; 
-            const nome = pet.nome || "Filhote";
-            const foto = pet.foto_url || "https://via.placeholder.com/500x500?text=Aguardando+Foto";
+        // === 1. CARREGAMENTO INICIAL ===
+        window.onload = () => {
+            carregarFilhotesPublico();
+            carregarPlantelPublico();
+            verificarSessao();
             
-            let badgeColor = "bg-green-500";
-            let btnStatus = "";
-            let opacity = "";
-            let grayscale = "";
+            // Menu Mobile (Agora funciona com todos os itens)
+            document.getElementById('mobile-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        };
 
-            if (status === "Reservado") {
-                badgeColor = "bg-yellow-500";
-                btnStatus = `<button class="w-full border border-yellow-500 text-yellow-600 font-semibold py-2 rounded cursor-default">Fila de Espera</button>`;
-            } else if (status === "Vendido") {
-                badgeColor = "bg-red-500";
-                opacity = "opacity-75";
-                grayscale = "grayscale";
-                btnStatus = `<button disabled class="w-full bg-gray-100 text-gray-400 font-semibold py-2 rounded cursor-not-allowed">Já tem dono</button>`;
-            } else {
-                btnStatus = `<a href="https://wa.me/557999285696?text=Olá, tenho interesse no ${nome}" target="_blank" class="block text-center w-full bg-brand-green text-white font-semibold py-2 rounded hover:bg-green-700 transition">Quero Reservar</a>`;
-            }
-
-            return `
-                <div class="border rounded-lg p-4 hover:shadow-lg transition relative bg-white ${opacity}">
-                    <span class="absolute top-2 right-2 ${badgeColor} text-white text-xs font-bold px-2 py-1 rounded shadow z-10">${status}</span>
-                    <div class="relative h-48 mb-4 overflow-hidden rounded-md">
-                        <img src="${foto}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500 ${grayscale}">
-                    </div>
-                    <div class="flex justify-between items-center mb-1">
-                        <h3 class="font-bold text-lg">${nome}</h3>
-                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">${pet.sexo || ''}</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-4">${pet.cor || ''}</p>
-                    ${btnStatus}
-                </div>
-            `;
-        }
-
-        async function carregarFilhotes() {
+        // === 2. EXIBIÇÃO PÚBLICA (LEITURA) ===
+        
+        async function carregarFilhotesPublico() {
             const grid = document.getElementById('grid-filhotes');
+            const { data } = await supabaseClient.from('filhotes').select('*').order('created_at', {ascending: false});
             
-            try {
-                // Aqui usamos supabaseClient em vez de supabase
-                const { data, error } = await supabaseClient
-                    .from('filhotes')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
-                if (data && data.length > 0) {
-                    grid.innerHTML = ''; 
-                    data.forEach(pet => {
-                        grid.innerHTML += montarCardOriginal(pet);
-                    });
-                } else {
-                    grid.innerHTML = '<p class="text-center col-span-full text-gray-500 py-10">Nenhum filhote cadastrado no momento.</p>';
-                }
-            } catch (err) {
-                console.error(err);
-                // Se der erro (provavelmente chaves erradas), mostra aviso amigável
-                grid.innerHTML = '<p class="text-center col-span-full text-red-500">Conecte o Supabase para ver os filhotes.</p>';
+            grid.innerHTML = '';
+            if(!data || data.length === 0) { 
+                grid.innerHTML = '<p class="col-span-full text-center py-8 bg-gray-50 rounded">Nenhum filhote cadastrado no momento.</p>'; 
+                return; 
             }
-        }
 
-        // ==========================================
-        // 2. FUNÇÕES ADMINISTRATIVAS
-        // ==========================================
-        
-        async function verificarSessao() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (session) {
-                document.getElementById('btn-admin-trigger').classList.remove('hidden');
-            }
-        }
-
-       async function fazerLogin(e) {
-            e.preventDefault();
-            
-            // 1. Muda o botão para dar feedback visual
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "Verificando...";
-            btn.disabled = true;
-
-            const email = document.getElementById('email-login').value;
-            const password = document.getElementById('senha-login').value;
-            
-            try {
-                // Tenta fazer o login
-                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+            data.forEach(pet => {
+                const corBadge = pet.status === 'Disponível' ? 'bg-green-500' : 'bg-red-500';
+                const opacity = pet.status === 'Vendido' ? 'opacity-60 grayscale' : '';
                 
-                if (error) {
-                    // Se o Supabase recusar (senha errada, email não confirmado, etc)
-                    alert("Erro ao entrar: " + error.message);
-                    console.error("Erro Supabase:", error);
-                } else {
-                    // SUCESSO!
-                    fecharModais();
-                    location.reload(); 
-                }
-            } catch (err) {
-                // Se o código quebrar (URL errada, erro de rede, etc)
-                alert("Erro Técnico: Verifique se sua URL e KEY do Supabase estão corretas no código.");
-                console.error("Erro Crítico:", err);
-            } finally {
-                // Restaura o botão
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+                grid.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group ${opacity}">
+                        <div class="relative h-64 overflow-hidden">
+                            <span class="absolute top-3 right-3 ${corBadge} text-white text-xs font-bold px-3 py-1 rounded-full shadow z-10 uppercase tracking-wide">${pet.status}</span>
+                            <img src="${pet.foto_url}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-brand-dark">${pet.nome}</h3>
+                                <i class="fas ${pet.sexo === 'Macho' ? 'fa-mars text-blue-500' : 'fa-venus text-pink-500'} text-lg"></i>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4"><i class="fas fa-palette mr-2"></i>${pet.cor}</p>
+                            
+                            ${pet.status === 'Disponível' 
+                                ? `<a href="https://wa.me/557999285696?text=Olá, tenho interesse no filhote ${pet.nome}!" target="_blank" class="block w-full bg-brand-green text-white text-center py-2 rounded font-bold hover:bg-green-700 transition"><i class="fab fa-whatsapp mr-2"></i>Tenho Interesse</a>` 
+                                : `<button disabled class="block w-full bg-gray-100 text-gray-400 py-2 rounded font-bold cursor-not-allowed">Indisponível</button>`
+                            }
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        async function fazerLogout() {
-            await supabaseClient.auth.signOut();
-            location.reload();
-        }
-
-        async function salvarFilhote() {
-            const btn = document.getElementById('btn-salvar');
-            const originalText = btn.innerText;
-            btn.innerText = "Enviando Foto...";
-            btn.disabled = true;
-
-            const nome = document.getElementById('input-nome').value;
-            const cor = document.getElementById('input-cor').value;
-            const sexo = document.getElementById('input-sexo').value;
-            const status = document.getElementById('input-status').value;
-            const arquivoFoto = document.getElementById('input-foto').files[0];
-
-            if (!nome || !arquivoFoto) {
-                alert("Por favor, coloque o nome e escolha uma foto.");
-                btn.innerText = originalText;
-                btn.disabled = false;
+        async function carregarPlantelPublico() {
+            const grid = document.getElementById('grid-plantel');
+            const { data, error } = await supabaseClient.from('plantel').select('*').order('created_at', {ascending: true});
+            
+            grid.innerHTML = '';
+            if(error || !data || data.length === 0) {
+                // Fallback elegante se não tiver nada
+                grid.innerHTML = '<p class="col-span-full text-center text-gray-400">Atualizando dados do plantel...</p>';
                 return;
             }
 
+            data.forEach(dog => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:-translate-y-2 transition duration-300">
+                        <div class="h-80 overflow-hidden relative">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition z-10"></div>
+                            <img src="${dog.foto_url}" class="w-full h-full object-cover object-top transform group-hover:scale-105 transition duration-700">
+                        </div>
+                        <div class="p-8 text-center relative bg-white">
+                            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-brand-gold text-brand-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg z-20">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-brand-dark mt-2">${dog.nome}</h3>
+                            <p class="text-gray-500 text-sm italic font-serif">${dog.descricao}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // === 3. LÓGICA DO ADMIN (CRUD COMPLETO) ===
+
+        function mudarAba(aba) {
+            document.getElementById('area-filhotes').classList.add('hidden');
+            document.getElementById('area-plantel').classList.add('hidden');
+            
+            const tabF = document.getElementById('tab-filhotes');
+            const tabP = document.getElementById('tab-plantel');
+            tabF.className = tabF.className.replace('tab-active', 'tab-inactive');
+            tabP.className = tabP.className.replace('tab-active', 'tab-inactive');
+
+            if(aba === 'filhotes') {
+                document.getElementById('area-filhotes').classList.remove('hidden');
+                tabF.className = tabF.className.replace('tab-inactive', 'tab-active');
+            } else {
+                document.getElementById('area-plantel').classList.remove('hidden');
+                tabP.className = tabP.className.replace('tab-inactive', 'tab-active');
+            }
+        }
+
+        // --- SALVAR FILHOTE (NOVO OU EDITAR) ---
+        async function salvarFilhote() {
+            const btn = document.getElementById('btn-salvar-filhote');
+            const originalText = btn.innerText;
+            btn.innerText = "Salvando..."; btn.disabled = true;
+
+            const idEdicao = document.getElementById('edit-id-filhote').value;
+            const nome = document.getElementById('f-nome').value;
+            const cor = document.getElementById('f-cor').value;
+            const sexo = document.getElementById('f-sexo').value;
+            const status = document.getElementById('f-status').value;
+            const arquivoFoto = document.getElementById('f-foto').files[0];
+
+            if (!nome) { alert("Nome é obrigatório!"); btn.innerText = originalText; btn.disabled = false; return; }
+
             try {
-                // 1. Upload da Foto
-                const nomeArquivo = Date.now() + '-' + arquivoFoto.name.replace(/[^a-zA-Z0-9.]/g, '');
-                const { error: uploadError } = await supabaseClient.storage
-                    .from('fotos-filhotes')
-                    .upload(nomeArquivo, arquivoFoto);
-
-                if (uploadError) throw uploadError;
-
-                // 2. Pegar Link Público
-                const { data: { publicUrl } } = supabaseClient.storage
-                    .from('fotos-filhotes')
-                    .getPublicUrl(nomeArquivo);
-
-                // 3. Salvar Dados
-                const { error: dbError } = await supabaseClient
-                    .from('filhotes')
-                    .insert([{ nome, cor, sexo, status, foto_url: publicUrl }]);
-
-                if (dbError) throw dbError;
-
-                alert("Filhote publicado com sucesso!");
-                document.getElementById('input-nome').value = '';
-                document.getElementById('input-cor').value = '';
-                document.getElementById('input-foto').value = '';
+                let urlFinal = null;
                 
-                carregarFilhotes();
-                carregarListaAdmin();
-                
+                if (arquivoFoto) {
+                    const nomeArq = Date.now() + '-' + arquivoFoto.name.replace(/[^a-zA-Z0-9.]/g, '');
+                    const { error: upErr } = await supabaseClient.storage.from('fotos-filhotes').upload(nomeArq, arquivoFoto);
+                    if (upErr) throw upErr;
+                    
+                    const { data } = supabaseClient.storage.from('fotos-filhotes').getPublicUrl(nomeArq);
+                    urlFinal = data.publicUrl;
+                }
+
+                const dados = { nome, cor, sexo, status };
+                if (urlFinal) dados.foto_url = urlFinal;
+
+                if (idEdicao) {
+                    await supabaseClient.from('filhotes').update(dados).eq('id', idEdicao);
+                    alert("Filhote atualizado!");
+                } else {
+                    if (!urlFinal) throw new Error("A foto é obrigatória para novos cadastros.");
+                    dados.foto_url = urlFinal;
+                    await supabaseClient.from('filhotes').insert([dados]);
+                    alert("Filhote cadastrado!");
+                }
+
+                cancelarEdicao('filhote');
+                carregarListaAdmin('filhotes');
+                carregarFilhotesPublico();
+
             } catch (err) {
-                console.error(err);
                 alert("Erro: " + err.message);
             } finally {
                 btn.innerText = originalText;
@@ -459,60 +416,195 @@
             }
         }
 
-        async function deletarFilhote(id) {
-            if(confirm("Tem certeza que deseja apagar?")) {
-                await supabaseClient.from('filhotes').delete().eq('id', id);
-                carregarListaAdmin();
-                carregarFilhotes();
+        // --- SALVAR PLANTEL (NOVO OU EDITAR) ---
+        async function salvarPlantel() {
+            const btn = document.getElementById('btn-salvar-plantel');
+            const originalText = btn.innerText;
+            btn.innerText = "Salvando..."; btn.disabled = true;
+
+            const idEdicao = document.getElementById('edit-id-plantel').value;
+            const nome = document.getElementById('p-nome').value;
+            const descricao = document.getElementById('p-descricao').value;
+            const arquivoFoto = document.getElementById('p-foto').files[0];
+
+            if (!nome) { alert("Nome é obrigatório!"); btn.innerText = originalText; btn.disabled = false; return; }
+
+            try {
+                let urlFinal = null;
+                if (arquivoFoto) {
+                    const nomeArq = 'plantel-' + Date.now() + '.jpg';
+                    const { error: upErr } = await supabaseClient.storage.from('fotos-filhotes').upload(nomeArq, arquivoFoto);
+                    if (upErr) throw upErr;
+                    const { data } = supabaseClient.storage.from('fotos-filhotes').getPublicUrl(nomeArq);
+                    urlFinal = data.publicUrl;
+                }
+
+                const dados = { nome, descricao };
+                if (urlFinal) dados.foto_url = urlFinal;
+
+                if (idEdicao) {
+                    await supabaseClient.from('plantel').update(dados).eq('id', idEdicao);
+                    alert("Cão atualizado!");
+                } else {
+                    if (!urlFinal) throw new Error("Foto é obrigatória.");
+                    dados.foto_url = urlFinal;
+                    await supabaseClient.from('plantel').insert([dados]);
+                    alert("Adicionado ao plantel!");
+                }
+
+                cancelarEdicao('plantel');
+                carregarListaAdmin('plantel');
+                carregarPlantelPublico();
+
+            } catch (err) {
+                alert("Erro: " + err.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
 
-        async function carregarListaAdmin() {
-            const lista = document.getElementById('lista-admin');
-            const { data } = await supabaseClient.from('filhotes').select('*').order('created_at', { ascending: false });
+        // --- FUNÇÕES DE CONTROLE ---
+        function prepararEdicaoFilhote(pet) {
+            document.getElementById('edit-id-filhote').value = pet.id;
+            document.getElementById('f-nome').value = pet.nome;
+            document.getElementById('f-cor').value = pet.cor;
+            document.getElementById('f-sexo').value = pet.sexo;
+            document.getElementById('f-status').value = pet.status;
             
-            lista.innerHTML = '';
-            if(data) {
-                data.forEach(pet => {
-                    lista.innerHTML += `
-                        <div class="flex justify-between items-center py-3">
-                            <div class="flex items-center gap-3">
-                                <img src="${pet.foto_url}" class="w-10 h-10 rounded object-cover border">
-                                <div>
-                                    <p class="font-bold text-sm">${pet.nome}</p>
-                                    <p class="text-xs text-gray-500">${pet.status}</p>
-                                </div>
-                            </div>
-                            <button onclick="deletarFilhote(${pet.id})" class="text-red-500 hover:text-red-700 text-sm font-semibold">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
-                });
+            document.getElementById('titulo-form-filhote').innerText = "Editando: " + pet.nome;
+            document.getElementById('btn-salvar-filhote').innerText = "Salvar Alterações";
+            document.getElementById('btn-cancel-filhote').classList.remove('hidden');
+            document.getElementById('aviso-foto-filhote').classList.remove('hidden');
+            document.getElementById('area-filhotes').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function prepararEdicaoPlantel(dog) {
+            document.getElementById('edit-id-plantel').value = dog.id;
+            document.getElementById('p-nome').value = dog.nome;
+            document.getElementById('p-descricao').value = dog.descricao;
+
+            document.getElementById('titulo-form-plantel').innerText = "Editando: " + dog.nome;
+            document.getElementById('btn-salvar-plantel').innerText = "Salvar Alterações";
+            document.getElementById('btn-cancel-plantel').classList.remove('hidden');
+            document.getElementById('aviso-foto-plantel').classList.remove('hidden');
+            document.getElementById('area-plantel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelarEdicao(tipo) {
+            if (tipo === 'filhote') {
+                document.getElementById('edit-id-filhote').value = "";
+                document.getElementById('f-nome').value = "";
+                document.getElementById('f-cor').value = "";
+                document.getElementById('f-foto').value = "";
+                
+                document.getElementById('titulo-form-filhote').innerText = "Adicionar Novo Filhote";
+                document.getElementById('btn-salvar-filhote').innerText = "Salvar Filhote";
+                document.getElementById('btn-cancel-filhote').classList.add('hidden');
+                document.getElementById('aviso-foto-filhote').classList.add('hidden');
+            } else {
+                document.getElementById('edit-id-plantel').value = "";
+                document.getElementById('p-nome').value = "";
+                document.getElementById('p-descricao').value = "";
+                document.getElementById('p-foto').value = "";
+
+                document.getElementById('titulo-form-plantel').innerText = "Adicionar Cão ao Plantel";
+                document.getElementById('btn-salvar-plantel').innerText = "Salvar no Plantel";
+                document.getElementById('btn-cancel-plantel').classList.add('hidden');
+                document.getElementById('aviso-foto-plantel').classList.add('hidden');
             }
         }
 
-        // ==========================================
-        // 3. CONTROLE DE TELA
-        // ==========================================
-        function abrirLogin() { document.getElementById('modal-login').classList.remove('hidden'); }
-        function abrirAdmin() { 
-            document.getElementById('modal-admin').classList.remove('hidden'); 
-            carregarListaAdmin();
+        async function deletarItem(tabela, id) {
+            if (confirm("Tem certeza que deseja apagar? Essa ação não tem volta.")) {
+                await supabaseClient.from(tabela).delete().eq('id', id);
+                if (tabela === 'filhotes') {
+                    carregarListaAdmin('filhotes');
+                    carregarFilhotesPublico();
+                } else {
+                    carregarListaAdmin('plantel');
+                    carregarPlantelPublico();
+                }
+            }
         }
+
+        async function carregarListaAdmin(tipo) {
+            if (tipo === 'filhotes') {
+                const div = document.getElementById('lista-admin-filhotes');
+                const { data } = await supabaseClient.from('filhotes').select('*').order('created_at', {ascending: false});
+                div.innerHTML = '';
+                
+                if(data) {
+                    data.forEach(pet => {
+                        const el = document.createElement('div');
+                        el.className = "flex justify-between items-center bg-gray-50 p-3 rounded border hover:bg-white transition";
+                        el.innerHTML = `
+                            <div class="flex items-center gap-3">
+                                <img src="${pet.foto_url}" class="w-12 h-12 rounded object-cover shadow-sm">
+                                <div><p class="font-bold text-brand-dark text-sm">${pet.nome}</p><p class="text-xs text-gray-500">${pet.status}</p></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-edit text-blue-500 hover:text-blue-700 p-2"><i class="fas fa-pen"></i></button>
+                                <button class="btn-del text-red-500 hover:text-red-700 p-2"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                        el.querySelector('.btn-edit').onclick = () => prepararEdicaoFilhote(pet);
+                        el.querySelector('.btn-del').onclick = () => deletarItem('filhotes', pet.id);
+                        div.appendChild(el);
+                    });
+                }
+            } else {
+                const div = document.getElementById('lista-admin-plantel');
+                const { data } = await supabaseClient.from('plantel').select('*').order('created_at', {ascending: true});
+                div.innerHTML = '';
+
+                if(data) {
+                    data.forEach(dog => {
+                        const el = document.createElement('div');
+                        el.className = "flex justify-between items-center bg-gray-50 p-3 rounded border hover:bg-white transition";
+                        el.innerHTML = `
+                            <div class="flex items-center gap-3">
+                                <img src="${dog.foto_url}" class="w-12 h-12 rounded object-cover shadow-sm">
+                                <div><p class="font-bold text-brand-dark text-sm">${dog.nome}</p><p class="text-xs text-gray-500 truncate max-w-[150px]">${dog.descricao}</p></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-edit text-blue-500 hover:text-blue-700 p-2"><i class="fas fa-pen"></i></button>
+                                <button class="btn-del text-red-500 hover:text-red-700 p-2"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                        el.querySelector('.btn-edit').onclick = () => prepararEdicaoPlantel(dog);
+                        el.querySelector('.btn-del').onclick = () => deletarItem('plantel', dog.id);
+                        div.appendChild(el);
+                    });
+                }
+            }
+        }
+
+        async function verificarSessao() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) { document.getElementById('btn-admin-trigger').classList.remove('hidden'); }
+        }
+        async function fazerLogin(e) {
+            e.preventDefault();
+            const { error } = await supabaseClient.auth.signInWithPassword({
+                email: document.getElementById('email-login').value,
+                password: document.getElementById('senha-login').value
+            });
+            if(error) alert("Erro: " + error.message);
+            else location.reload();
+        }
+        async function fazerLogout() { await supabaseClient.auth.signOut(); location.reload(); }
+
+        function abrirAdmin() {
+            document.getElementById('modal-admin').classList.remove('hidden');
+            carregarListaAdmin('filhotes'); 
+            mudarAba('filhotes');
+        }
+        function abrirLogin() { document.getElementById('modal-login').classList.remove('hidden'); }
         function fecharModais() {
             document.getElementById('modal-login').classList.add('hidden');
             document.getElementById('modal-admin').classList.add('hidden');
         }
-
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        window.onload = () => {
-            carregarFilhotes();
-            verificarSessao();
-        };
 
     </script>
 </body>

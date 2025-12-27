@@ -6,22 +6,35 @@
     <title>Via Border - Criação Selecionada de Border Collie</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1076/1076928.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
         
-        /* Efeito Parallax simples no Hero */
+        /* Efeito Parallax (Corrigido para Celular) */
         .hero-bg {
+            /* O degradê escuro + a imagem */
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?q=80&w=2572&auto=format&fit=crop');
-            background-size: cover;
+            
+            /* Configuração padrão (Mobile Friendly) */
             background-position: center;
-            background-attachment: fixed;
+            background-size: cover;
+            background-attachment: scroll; /* No celular, a imagem rola junto */
         }
+
+        /* Só ativa o efeito "travado" em telas maiores que tablets */
+        @media (min-width: 768px) {
+            .hero-bg {
+                background-attachment: fixed;
+            }
+        }
+        
+        /* Classes utilitárias para esconder o painel */
+        .hidden { display: none; }
     </style>
     
     <script>
@@ -29,8 +42,8 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-green': '#2C5F2D', // Verde floresta (confiança/natureza)
-                        'brand-gold': '#D4AF37',  // Dourado (premium/campeão)
+                        'brand-green': '#2C5F2D',
+                        'brand-gold': '#D4AF37', 
                         'brand-dark': '#1A202C',
                     }
                 }
@@ -62,10 +75,8 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4">
             <a href="#home" class="block py-2 text-brand-green font-bold">Início</a>
-            <a href="#sobre" class="block py-2 text-gray-600">O Canil</a>
-            <a href="#plantel" class="block py-2 text-gray-600">Plantel</a>
             <a href="#filhotes" class="block py-2 text-gray-600">Filhotes</a>
-            <a href="#contato" class="block py-2 text-brand-green font-bold">Falar no WhatsApp</a>
+            <a href="#contato" class="block py-2 text-brand-green font-bold">WhatsApp</a>
         </div>
     </nav>
 
@@ -75,112 +86,56 @@
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
                 Inteligência, Beleza e <br> Temperamento.
             </h1>
-            <p class="text-lg md:text-xl mb-10 opacity-90 max-w-2xl mx-auto">
-                Cães selecionados geneticamente para trabalho, esporte e companhia. Conheça a linhagem do Via Border.
-            </p>
             <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#filhotes" class="bg-brand-gold text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 transition shadow-xl transform hover:-translate-y-1">
+                <a href="#filhotes" class="bg-brand-gold text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 transition shadow-xl">
                     Ver Filhotes Disponíveis
-                </a>
-                <a href="#plantel" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-brand-green transition">
-                    Conhecer Linhagem
                 </a>
             </div>
         </div>
     </header>
 
-    <section class="py-12 bg-gray-50 border-b">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div class="p-6">
-                <i class="fas fa-dna text-4xl text-brand-green mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">Genética Testada</h3>
-                <p class="text-sm text-gray-600">Todos os nossos cães possuem laudos de CEA, TNS e Displasia Coxofemoral.</p>
-            </div>
-            <div class="p-6">
-                <i class="fas fa-brain text-4xl text-brand-green mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">Temperamento</h3>
-                <p class="text-sm text-gray-600">Focamos em cães equilibrados, ideais tanto para o esporte quanto para a família.</p>
-            </div>
-            <div class="p-6">
-                <i class="fas fa-medal text-4xl text-brand-green mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">Pedigree CBKC</h3>
-                <p class="text-sm text-gray-600">Criação registrada e reconhecida, garantindo a pureza e a história da raça.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="sobre" class="py-20">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2">
-                <img src="https://images.unsplash.com/photo-1616428787728-661c9e88d07c?q=80&w=2000&auto=format&fit=crop" alt="Dono com cachorro" class="rounded-lg shadow-2xl">
-            </div>
-            <div class="md:w-1/2">
-                <h4 class="text-brand-green font-bold uppercase tracking-wide mb-2">Quem Somos</h4>
-                <h2 class="text-4xl font-bold text-gray-800 mb-6">Paixão pelo Border Collie</h2>
-                <p class="text-gray-600 mb-4 leading-relaxed">
-                    O <strong>Via Border</strong> nasceu do amor pela raça mais inteligente do mundo. Nosso objetivo não é apenas criar cães, mas sim aprimorar a raça, garantindo saúde e estrutura.
-                </p>
-                <p class="text-gray-600 mb-6 leading-relaxed">
-                    Nossos cães não vivem apenas em canis; eles fazem parte da nossa família, participam de atividades de pastoreio e agility, garantindo uma mente saudável e ativa.
-                </p>
-                <ul class="space-y-2 mb-8">
-                    <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i> Socialização precoce</li>
-                    <li class="flex items-center"><i class="fas fa-check text-brand-gold mr-3"></i> Acompanhamento veterinário 24h</li>
-                </ul>
-            </div>
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-6">Paixão pelo Border Collie</h2>
+            <p class="text-gray-600 mb-4 max-w-2xl mx-auto">
+                Nossa criação é baseada no amor pela raça e no compromisso com o padrão oficial. 
+                Cães testados geneticamente e com controle de displasia.
+            </p>
         </div>
     </section>
 
-    <section id="plantel" class="py-20 bg-gray-900 text-white">
+    <section id="plantel" class="py-20 bg-gray-100">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Nosso Plantel</h2>
-                <p class="text-gray-400">Conheça os pais e mães das nossas estrelas.</p>
+                <h2 class="text-4xl font-bold text-brand-dark">Nosso Plantel</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto mt-4"></div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1563892804-d55c9110751e?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold">Apollo (Padreador)</h3>
-                            <i class="fas fa-mars text-blue-400 text-xl"></i>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Blue Merle • Campeão Panamericano</p>
-                        <div class="border-t border-gray-700 pt-4 text-sm space-y-1 text-gray-300">
-                            <p><strong>CEA:</strong> Normal</p>
-                            <p><strong>Displasia:</strong> A (Isento)</p>
-                        </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1568393691622-c7ba78064b51?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Grand Ch. Apollo</h3>
+                        <p class="text-gray-500 text-sm">Padreador Importado</p>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1529429612779-c8e40df2f5ce?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold">Luna (Matriz)</h3>
-                            <i class="fas fa-venus text-pink-400 text-xl"></i>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Preto e Branco • Importada</p>
-                        <div class="border-t border-gray-700 pt-4 text-sm space-y-1 text-gray-300">
-                            <p><strong>CEA:</strong> Carrier</p>
-                            <p><strong>Displasia:</strong> B</p>
-                        </div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1601979031925-424e5d4a7874?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Ch. Luna</h3>
+                        <p class="text-gray-500 text-sm">Matriz Principal</p>
                     </div>
                 </div>
-
-                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-                    <img src="https://images.unsplash.com/photo-1599351403567-27a387796d8e?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="text-xl font-bold">Bolt (Futuro)</h3>
-                            <i class="fas fa-mars text-blue-400 text-xl"></i>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Red Merle • Agility Pro</p>
-                        <div class="border-t border-gray-700 pt-4 text-sm space-y-1 text-gray-300">
-                            <p><strong>CEA:</strong> Normal</p>
-                            <p><strong>Displasia:</strong> Em análise</p>
-                        </div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529927066849-79b791a69825?q=80&w=800" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2">Maximus</h3>
+                        <p class="text-gray-500 text-sm">Jovem Campeão</p>
                     </div>
                 </div>
             </div>
@@ -189,77 +144,376 @@
 
     <section id="filhotes" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <span class="bg-green-100 text-brand-green py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wide">Ninhada Atual</span>
-                <h2 class="text-4xl font-bold mt-4 mb-4">Disponíveis para Reserva</h2>
-                <p class="text-gray-600">Nascimento: 15/10/2023 | Entrega a partir de: 15/12/2023</p>
+            <div class="text-center mb-12 relative">
+                <span id="system-status" class="bg-green-100 text-brand-green py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wide">Atualizado Agora</span>
+                <h2 class="text-4xl font-bold mt-4 mb-4">Filhotes da Ninhada</h2>
+                <p class="text-gray-600">Encontre o seu novo melhor amigo.</p>
+                
+                <button id="btn-admin-trigger" onclick="abrirAdmin()" class="hidden absolute top-0 right-0 bg-brand-dark text-white text-xs px-3 py-1 rounded shadow hover:bg-gray-800">
+                    <i class="fas fa-cog"></i> Gerenciar
+                </button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="border rounded-lg p-4 hover:shadow-lg transition relative">
-                    <span class="absolute top-2 right-2 bg-brand-green text-white text-xs font-bold px-2 py-1 rounded">Disponível</span>
-                    <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=80&w=500&auto=format&fit=crop" class="w-full h-48 object-cover rounded-md mb-4">
-                    <h3 class="font-bold text-lg">Macho 01</h3>
-                    <p class="text-sm text-gray-500 mb-3">Cor: Preto e Branco</p>
-                    <button class="w-full border border-brand-green text-brand-green font-semibold py-2 rounded hover:bg-brand-green hover:text-white transition">Mais Detalhes</button>
-                </div>
-
-                <div class="border rounded-lg p-4 hover:shadow-lg transition relative">
-                    <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Reservado</span>
-                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=500&auto=format&fit=crop" class="w-full h-48 object-cover rounded-md mb-4 grayscale opacity-75">
-                    <h3 class="font-bold text-lg">Fêmea 01</h3>
-                    <p class="text-sm text-gray-500 mb-3">Cor: Blue Merle</p>
-                    <button disabled class="w-full bg-gray-200 text-gray-500 font-semibold py-2 rounded cursor-not-allowed">Indisponível</button>
-                </div>
-
-                 <div class="border rounded-lg p-4 hover:shadow-lg transition relative">
-                    <span class="absolute top-2 right-2 bg-brand-green text-white text-xs font-bold px-2 py-1 rounded">Disponível</span>
-                    <img src="https://images.unsplash.com/photo-1628148902500-1c0c1b4b1a8c?q=80&w=500&auto=format&fit=crop" class="w-full h-48 object-cover rounded-md mb-4">
-                    <h3 class="font-bold text-lg">Macho 02</h3>
-                    <p class="text-sm text-gray-500 mb-3">Cor: Chocolate</p>
-                    <button class="w-full border border-brand-green text-brand-green font-semibold py-2 rounded hover:bg-brand-green hover:text-white transition">Mais Detalhes</button>
-                </div>
-
-                <div class="border rounded-lg p-4 hover:shadow-lg transition relative">
-                    <span class="absolute top-2 right-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded">Em Negociação</span>
-                    <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=500&auto=format&fit=crop" class="w-full h-48 object-cover rounded-md mb-4">
-                    <h3 class="font-bold text-lg">Fêmea 02</h3>
-                    <p class="text-sm text-gray-500 mb-3">Cor: Preto e Branco</p>
-                    <button class="w-full border border-yellow-500 text-yellow-600 font-semibold py-2 rounded hover:bg-yellow-500 hover:text-white transition">Fila de Espera</button>
+            <div id="grid-filhotes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="col-span-full text-center py-10 text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-3xl mb-3"></i>
+                    <p>Carregando disponibilidade...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contato" class="bg-gray-50 py-20 border-t">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-8">Leve um Via Border para casa</h2>
-            <p class="mb-10 text-gray-600 max-w-xl mx-auto">Temos critérios rigorosos para garantir que nossos filhotes vão para lares amorosos e preparados. Fale conosco.</p>
+    <footer id="contato" class="bg-brand-dark text-white py-12">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="text-2xl font-bold text-brand-gold mb-4">VIA BORDER</h3>
+                <p class="text-gray-400 text-sm">Criando com amor, responsabilidade e ciência para entregar o melhor amigo da sua vida.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-widest text-sm">Contato</h4>
+                <p class="text-gray-400 mb-2"><i class="fab fa-whatsapp text-brand-green mr-2"></i> (79) 99928-5696</p>
+                <p class="text-gray-400"><i class="fas fa-map-marker-alt text-brand-gold mr-2"></i> Aracaju, SE</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-widest text-sm">Redes Sociais</h4>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-600 text-sm">
+            <p>&copy; 2025 Canil Via Border. Todos os direitos reservados.</p>
             
-            <a href="#" class="inline-flex items-center bg-green-500 text-white font-bold py-4 px-8 rounded-full text-lg hover:bg-green-600 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                <i class="fab fa-whatsapp text-2xl mr-3"></i> Falar com o Criador
-            </a>
-
-            <div class="mt-12 flex justify-center space-x-6 text-gray-400">
-                <a href="https://www.instagram.com/via_border/#" target="_blank" class="hover:text-brand-green text-2xl"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-brand-green text-2xl"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="hover:text-brand-green text-2xl"><i class="fab fa-youtube"></i></a>
-            </div>
+            <button onclick="abrirLogin()" class="mt-4 text-xs hover:text-gray-400 underline opacity-50">Área do Criador</button>
         </div>
-    </section>
-
-    <footer class="bg-brand-dark text-gray-500 py-6 text-center text-sm">
-        <p>&copy; 2025 Canil Via Border. Todos os direitos reservados.</p>
-        <p class="mt-2">Desenvolvido com <i class="fas fa-heart text-red-500"></i> por [Seu Nome]</p>
     </footer>
 
-    <script>
-        const btn = document.getElementById('mobile-btn');
-        const menu = document.getElementById('mobile-menu');
+    <div id="modal-login" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg p-8 max-w-sm w-full shadow-2xl relative">
+            <button onclick="fecharModais()" class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+            <h3 class="text-2xl font-bold mb-1 text-brand-dark">Área Restrita</h3>
+            <p class="text-gray-500 text-sm mb-6">Acesso exclusivo para administração.</p>
+            
+            <form onsubmit="fazerLogin(event)">
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
+                <input type="email" id="email-login" class="w-full border p-2 rounded mb-3 bg-gray-50 focus:border-brand-green outline-none">
+                
+                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Senha</label>
+                <input type="password" id="senha-login" class="w-full border p-2 rounded mb-6 bg-gray-50 focus:border-brand-green outline-none">
+                
+                <button type="submit" class="w-full bg-brand-green text-white py-3 rounded font-bold hover:bg-green-800 transition shadow-lg">ENTRAR</button>
+            </form>
+        </div>
+    </div>
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+    <div id="modal-admin" class="hidden fixed inset-0 bg-gray-100 z-50 overflow-y-auto">
+        <div class="bg-white shadow-md sticky top-0 z-10">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-brand-green">Painel de Controle</h2>
+                <div>
+                    <button onclick="fecharModais()" class="text-gray-500 mr-4 hover:text-brand-dark">Voltar ao Site</button>
+                    <button onclick="fazerLogout()" class="text-red-500 font-bold border border-red-500 px-3 py-1 rounded hover:bg-red-50">Sair</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 py-8 max-w-4xl">
+            <div class="bg-white p-6 rounded-xl shadow-lg mb-8 border-t-4 border-brand-green">
+                <h3 class="text-lg font-bold mb-4 text-gray-800"><i class="fas fa-plus-circle mr-2"></i>Adicionar Novo Filhote</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nome</label>
+                        <input id="input-nome" type="text" placeholder="Ex: Thor" class="w-full border p-2 rounded focus:ring-2 ring-brand-green outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Cor</label>
+                        <input id="input-cor" type="text" placeholder="Ex: Preto e Branco" class="w-full border p-2 rounded focus:ring-2 ring-brand-green outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Sexo</label>
+                        <select id="input-sexo" class="w-full border p-2 rounded bg-white">
+                            <option value="Macho">Macho</option>
+                            <option value="Fêmea">Fêmea</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Status</label>
+                        <select id="input-status" class="w-full border p-2 rounded bg-white">
+                            <option value="Disponível">Disponível</option>
+                            <option value="Reservado">Reservado</option>
+                            <option value="Vendido">Vendido</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Foto do Filhote</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded p-6 text-center hover:bg-gray-50 transition cursor-pointer relative">
+                        <input type="file" id="input-foto" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-sm text-gray-500">Clique ou arraste a foto aqui</p>
+                    </div>
+                </div>
+
+                <button onclick="salvarFilhote()" id="btn-salvar" class="mt-6 w-full bg-brand-gold text-brand-dark py-3 rounded font-bold hover:bg-yellow-500 transition shadow">
+                    PUBLICAR FILHOTE
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-bold mb-4 text-gray-800">Gerenciar Lista Atual</h3>
+                <div id="lista-admin" class="divide-y">
+                    <p class="text-gray-400 text-center py-4">Carregando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURAÇÃO (COLOQUE SEUS DADOS AQUI)
+        // ==========================================
+        const SUPABASE_URL = 'https://ypvlhultmzlxxpfbudbu.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwdmxodWx0bXpseHhwZmJ1ZGJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3NzUyODcsImV4cCI6MjA4MjM1MTI4N30.n0RdzOylHQuGWGspHFcpOv3CDGyaa_CT0lHIBFz2QwA';
+        
+        // CORREÇÃO: Usamos 'supabaseClient' para não conflitar com a biblioteca
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ==========================================
+        // 1. CARREGAR O SITE PÚBLICO
+        // ==========================================
+        
+        function montarCardOriginal(pet) {
+            const status = pet.status || "Disponível"; 
+            const nome = pet.nome || "Filhote";
+            const foto = pet.foto_url || "https://via.placeholder.com/500x500?text=Aguardando+Foto";
+            
+            let badgeColor = "bg-green-500";
+            let btnStatus = "";
+            let opacity = "";
+            let grayscale = "";
+
+            if (status === "Reservado") {
+                badgeColor = "bg-yellow-500";
+                btnStatus = `<button class="w-full border border-yellow-500 text-yellow-600 font-semibold py-2 rounded cursor-default">Fila de Espera</button>`;
+            } else if (status === "Vendido") {
+                badgeColor = "bg-red-500";
+                opacity = "opacity-75";
+                grayscale = "grayscale";
+                btnStatus = `<button disabled class="w-full bg-gray-100 text-gray-400 font-semibold py-2 rounded cursor-not-allowed">Já tem dono</button>`;
+            } else {
+                btnStatus = `<a href="https://wa.me/557999285696?text=Olá, tenho interesse no ${nome}" target="_blank" class="block text-center w-full bg-brand-green text-white font-semibold py-2 rounded hover:bg-green-700 transition">Quero Reservar</a>`;
+            }
+
+            return `
+                <div class="border rounded-lg p-4 hover:shadow-lg transition relative bg-white ${opacity}">
+                    <span class="absolute top-2 right-2 ${badgeColor} text-white text-xs font-bold px-2 py-1 rounded shadow z-10">${status}</span>
+                    <div class="relative h-48 mb-4 overflow-hidden rounded-md">
+                        <img src="${foto}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500 ${grayscale}">
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="font-bold text-lg">${nome}</h3>
+                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">${pet.sexo || ''}</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">${pet.cor || ''}</p>
+                    ${btnStatus}
+                </div>
+            `;
+        }
+
+        async function carregarFilhotes() {
+            const grid = document.getElementById('grid-filhotes');
+            
+            try {
+                // Aqui usamos supabaseClient em vez de supabase
+                const { data, error } = await supabaseClient
+                    .from('filhotes')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    grid.innerHTML = ''; 
+                    data.forEach(pet => {
+                        grid.innerHTML += montarCardOriginal(pet);
+                    });
+                } else {
+                    grid.innerHTML = '<p class="text-center col-span-full text-gray-500 py-10">Nenhum filhote cadastrado no momento.</p>';
+                }
+            } catch (err) {
+                console.error(err);
+                // Se der erro (provavelmente chaves erradas), mostra aviso amigável
+                grid.innerHTML = '<p class="text-center col-span-full text-red-500">Conecte o Supabase para ver os filhotes.</p>';
+            }
+        }
+
+        // ==========================================
+        // 2. FUNÇÕES ADMINISTRATIVAS
+        // ==========================================
+        
+        async function verificarSessao() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                document.getElementById('btn-admin-trigger').classList.remove('hidden');
+            }
+        }
+
+       async function fazerLogin(e) {
+            e.preventDefault();
+            
+            // 1. Muda o botão para dar feedback visual
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Verificando...";
+            btn.disabled = true;
+
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('senha-login').value;
+            
+            try {
+                // Tenta fazer o login
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                
+                if (error) {
+                    // Se o Supabase recusar (senha errada, email não confirmado, etc)
+                    alert("Erro ao entrar: " + error.message);
+                    console.error("Erro Supabase:", error);
+                } else {
+                    // SUCESSO!
+                    fecharModais();
+                    location.reload(); 
+                }
+            } catch (err) {
+                // Se o código quebrar (URL errada, erro de rede, etc)
+                alert("Erro Técnico: Verifique se sua URL e KEY do Supabase estão corretas no código.");
+                console.error("Erro Crítico:", err);
+            } finally {
+                // Restaura o botão
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function fazerLogout() {
+            await supabaseClient.auth.signOut();
+            location.reload();
+        }
+
+        async function salvarFilhote() {
+            const btn = document.getElementById('btn-salvar');
+            const originalText = btn.innerText;
+            btn.innerText = "Enviando Foto...";
+            btn.disabled = true;
+
+            const nome = document.getElementById('input-nome').value;
+            const cor = document.getElementById('input-cor').value;
+            const sexo = document.getElementById('input-sexo').value;
+            const status = document.getElementById('input-status').value;
+            const arquivoFoto = document.getElementById('input-foto').files[0];
+
+            if (!nome || !arquivoFoto) {
+                alert("Por favor, coloque o nome e escolha uma foto.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                // 1. Upload da Foto
+                const nomeArquivo = Date.now() + '-' + arquivoFoto.name.replace(/[^a-zA-Z0-9.]/g, '');
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('fotos-filhotes')
+                    .upload(nomeArquivo, arquivoFoto);
+
+                if (uploadError) throw uploadError;
+
+                // 2. Pegar Link Público
+                const { data: { publicUrl } } = supabaseClient.storage
+                    .from('fotos-filhotes')
+                    .getPublicUrl(nomeArquivo);
+
+                // 3. Salvar Dados
+                const { error: dbError } = await supabaseClient
+                    .from('filhotes')
+                    .insert([{ nome, cor, sexo, status, foto_url: publicUrl }]);
+
+                if (dbError) throw dbError;
+
+                alert("Filhote publicado com sucesso!");
+                document.getElementById('input-nome').value = '';
+                document.getElementById('input-cor').value = '';
+                document.getElementById('input-foto').value = '';
+                
+                carregarFilhotes();
+                carregarListaAdmin();
+                
+            } catch (err) {
+                console.error(err);
+                alert("Erro: " + err.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function deletarFilhote(id) {
+            if(confirm("Tem certeza que deseja apagar?")) {
+                await supabaseClient.from('filhotes').delete().eq('id', id);
+                carregarListaAdmin();
+                carregarFilhotes();
+            }
+        }
+
+        async function carregarListaAdmin() {
+            const lista = document.getElementById('lista-admin');
+            const { data } = await supabaseClient.from('filhotes').select('*').order('created_at', { ascending: false });
+            
+            lista.innerHTML = '';
+            if(data) {
+                data.forEach(pet => {
+                    lista.innerHTML += `
+                        <div class="flex justify-between items-center py-3">
+                            <div class="flex items-center gap-3">
+                                <img src="${pet.foto_url}" class="w-10 h-10 rounded object-cover border">
+                                <div>
+                                    <p class="font-bold text-sm">${pet.nome}</p>
+                                    <p class="text-xs text-gray-500">${pet.status}</p>
+                                </div>
+                            </div>
+                            <button onclick="deletarFilhote(${pet.id})" class="text-red-500 hover:text-red-700 text-sm font-semibold">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // ==========================================
+        // 3. CONTROLE DE TELA
+        // ==========================================
+        function abrirLogin() { document.getElementById('modal-login').classList.remove('hidden'); }
+        function abrirAdmin() { 
+            document.getElementById('modal-admin').classList.remove('hidden'); 
+            carregarListaAdmin();
+        }
+        function fecharModais() {
+            document.getElementById('modal-login').classList.add('hidden');
+            document.getElementById('modal-admin').classList.add('hidden');
+        }
+
+        document.getElementById('mobile-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+
+        window.onload = () => {
+            carregarFilhotes();
+            verificarSessao();
+        };
+
     </script>
 </body>
 </html>
